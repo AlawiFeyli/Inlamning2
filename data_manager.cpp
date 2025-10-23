@@ -9,11 +9,13 @@
 
 using namespace std;
 
+// Adds a new tempvalue to list
 void DataManager::addMeasurement(float value, const string& timestamp) {
 	measurements.push_back({ value, timestamp });
 	cout << "Temperature added!\n";
 }
 
+// Prints all the tempvalues from the list with timestamp
 void DataManager::displayMeasurements() const {
 	if (measurements.empty()) {
 		cout << "No measurements available.\n";
@@ -27,6 +29,7 @@ void DataManager::displayMeasurements() const {
 	cout << "\n";
 }
 
+// Searches for a specific temp value in list
 void DataManager::searchMeasurement(float value) const {
 	bool found = false;
 	for (size_t i = 0; i < measurements.size(); ++i) {
@@ -41,6 +44,7 @@ void DataManager::searchMeasurement(float value) const {
 	}
 }
 
+// Sorts the list either ascending or descending based of user input
 void DataManager::sortMeasurement(bool ascending) {
 	if (ascending) {
 		sort(measurements.begin(), measurements.end(),
@@ -53,6 +57,7 @@ void DataManager::sortMeasurement(bool ascending) {
 	}
 }
 
+// Shows statistic: mean, min, max & standard deviation 
 void DataManager::showStatistics() const {
 	if (measurements.empty()) {
 		cout << "No data to analyze.\n";
@@ -73,6 +78,7 @@ void DataManager::showStatistics() const {
 	variance /= n;
 	float stdDev = sqrt(variance);
 
+	// Prints out the statistic
 	cout << "==============================\n";
 	cout << "Statistics:\n";
 	cout << "==============================\n";
@@ -86,6 +92,7 @@ void DataManager::showStatistics() const {
 	cout << "==============================\n";
 }
 
+// Counts how many values is under/over a specific temp from user input
 void DataManager::thresholdDetection(float criticalTemp) const {
 	int over = 0, under = 0;
 	for (const auto& m : measurements) {
@@ -102,6 +109,7 @@ void DataManager::thresholdDetection(float criticalTemp) const {
 	cout << "==============================\n";
 }
 
+// Loads measurements from "temperatures.csv" CSV file
 bool DataManager::loadFromFile(const string& filename) {
 	ifstream file(filename);
 	if (!file.is_open()) return false;
@@ -119,6 +127,7 @@ bool DataManager::loadFromFile(const string& filename) {
 	return true;
 }
 
+// Saves all measurements to "temperatures.csv" CSV file
 bool DataManager::saveToFile(const string& filename) const {
 	ofstream file(filename);
 	if (!file.is_open()) return false;

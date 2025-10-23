@@ -9,7 +9,7 @@
 #include "data_manager.h" // Added new header file into main.cpp
 using namespace std;
 
-// Function for getting timestamp
+// Function for getting timestamp "YYYY-MM-DD HH:MM"
 std::string getCurrentTimestamp() {
 	time_t now = time(nullptr);
 	char buf[80];
@@ -17,23 +17,27 @@ std::string getCurrentTimestamp() {
 	return std::string(buf);
 }
 // Function for inputting temperature data
+/*
 void inputTemperature(vector<float>& temps) {
 	float t;
 	cout << "Input temperature: ";
 	cin >> t;
 	temps.push_back(t);
 	cout << "Temperature added!\n\n";
-}
+} */
 
-// Function to show all temperaturess inputted
+// Function to show all temperaturess inputted 
+/*
 void displayData(const vector<float>& temps) {
 	cout << "Temperatures:\n";
 	for (float t : temps) {
 		cout << t << "*C" << "\n";
 	}
 	cout << "\n\n";
-}
+} */
+
 // Function to search for a specific temperatur in input list
+/*
 void searchData(const vector<float>& temps) {
 	if (temps.empty()) {
 		cout << "List is empty. Input a temperature first. \n\n";
@@ -62,9 +66,10 @@ void searchData(const vector<float>& temps) {
 	else {
 		cout << "Temperature " << searchValue << " is not in list.\n\n";
 	}
-}
+} */
 
 // Function that shows the list of temperatures ascending or descending
+/*
 void sortList(vector<float>& temps) {
 	if (temps.empty()) {
 		cout << "The list is empty, please add temperatures first.\n\n";
@@ -95,8 +100,10 @@ void sortList(vector<float>& temps) {
 	for (float t : temps)
 		cout << t << " ";
 	cout << "\n\n";
-}
+} */
+
 // Function that shows statistics of temperatures
+/*
 void showStatistics(const vector<float> temps) {
 	if (temps.empty()) {
 		cout << "The list is empty, please input temperatures first.\n\n";
@@ -133,9 +140,10 @@ void showStatistics(const vector<float> temps) {
 	cout << "Variance: " << variance << "\n";
 	cout << "Standard deviation: " << stdDev << "\n";
 	cout << "==============================\n\n";
-}
+} */
 
 // Threshold detection function 
+/*
 void thresholdDetection(const vector<float>& temps) {
 	if (temps.empty()) {
 		cout << "List is empty, add temperatures first. \n";
@@ -164,17 +172,18 @@ void thresholdDetection(const vector<float>& temps) {
 	cout << "Times over: " << overCount << "\n";
 	cout << "Times under: " << underCount << "\n";
 	cout << "==============================\n";
-}
+} */
 
 
 int main()
 {
+	// Loads previous measurements from file at program startup
 	DataManager manager;
 	manager.loadFromFile("temperatures.csv");
 
 	int choice = 0;
 	while (choice != 7) {
-		// The menu
+		// The menu print
 		cout << "==============================" << "\n";
 		cout << "Data Analysis tool" << "\n";
 		cout << "==============================" << "\n";
@@ -190,6 +199,7 @@ int main()
 		cin >> choice; // Get user choice
 		cout << "\n";
 		
+		// Handles unser choice
 		switch (choice) {
 		case 1: {
 			float temp;
@@ -228,6 +238,7 @@ int main()
 			manager.thresholdDetection(threshold);
 			break;
 		}
+		// Saves measurements to "temperatures.csv" file before program ends
 		case 7: {
 			manager.saveToFile("temperatures.csv");
 			cout << "Exiting program.\n";
